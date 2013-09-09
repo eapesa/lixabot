@@ -1,0 +1,40 @@
+<html>
+<head>
+    <script type="text/javascript" src="/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#btn_submit").click(function(){
+			$.ajax({
+				url: "/",
+				type: "POST",
+				data: JSON.stringify({
+					room_jid: $("#txt_jid").val(),
+                    room_name: $("#txt_name").val()
+				}),
+				contentType: "application/json",
+				dataType: "json"
+			}).done(function(data){
+                console.log(data);
+				$("div_done").html(data.message);
+			});
+        });
+        
+    });
+    </script>
+</head>
+
+<body>
+    <div id="div_main">
+        <div id="div_workspace">
+            Create MUC room of Ejabberd<br>
+            <br><br>
+            JID of Room: &nbsp; <input id="txt_jid" type="text" /><br>
+            Room Name: &nbsp; <input id="txt_name" type="text" /><br>
+            <br><br>
+            <button id="btn_submit">Create Room</button>
+        </div>
+        
+        <div id="div_done"></div>
+    </div>
+</body>
+</html>
