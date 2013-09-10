@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script type="text/javascript" src="/jquery.js"></script>
+    <script type="text/javascript" src="/media/jquery.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
         $("#btn_create").click(function(){
@@ -18,7 +18,7 @@
 				$("#div_done").html(data.message);
 			});
         });
-		$("#btn_destroy").click(function(){
+		$("#btn_delete").click(function(){
             var room_jid = $("#txt_jid2").val();
 			$.ajax({
 				url: "/rooms/" + room_jid,
@@ -28,7 +28,17 @@
                 console.log(data);
 				$("#div_done").html(data.message);
 			});
-		});  
+		});
+        $("#btn_disco").click(function(){
+			$.ajax({
+				url: "/rooms",
+				type: "GET"
+			}).
+			done(function(data){
+                console.log(data);
+				$("#div_done").html(data.message);
+			});
+        });
     });
     </script>
 </head>
@@ -44,7 +54,10 @@
             
             <br><br>
             JID of room to destroy: &nbsp; <input id="txt_jid2" type="text" /> &nbsp;
-            <button id="btn_destroy">Destroy Room</button><br>
+            <button id="btn_delete">Destroy Room</button><br>
+            
+            <br><br>
+            <button id="btn_disco">Discover Rooms</button><br>
         </div>
         
         <div id="div_done"></div>
