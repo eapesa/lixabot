@@ -3,9 +3,9 @@
     <script type="text/javascript" src="/jquery.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-        $("#btn_submit").click(function(){
+        $("#btn_create").click(function(){
 			$.ajax({
-				url: "/",
+				url: "/rooms",
 				type: "POST",
 				data: JSON.stringify({
 					room_jid: $("#txt_jid").val(),
@@ -15,10 +15,20 @@
 				dataType: "json"
 			}).done(function(data){
                 console.log(data);
-				$("div_done").html(data.message);
+				$("#div_done").html(data.message);
 			});
         });
-        
+		$("#btn_destroy").click(function(){
+            var room_jid = $("#txt_jid2").val();
+			$.ajax({
+				url: "/rooms/" + room_jid,
+				type: "DELETE"
+			}).
+			done(function(data){
+                console.log(data);
+				$("#div_done").html(data.message);
+			});
+		});  
     });
     </script>
 </head>
@@ -30,8 +40,11 @@
             <br><br>
             JID of Room: &nbsp; <input id="txt_jid" type="text" /><br>
             Room Name: &nbsp; <input id="txt_name" type="text" /><br>
+            <button id="btn_create">Create Room</button><br>
+            
             <br><br>
-            <button id="btn_submit">Create Room</button>
+            JID of room to destroy: &nbsp; <input id="txt_jid2" type="text" /> &nbsp;
+            <button id="btn_destroy">Destroy Room</button><br>
         </div>
         
         <div id="div_done"></div>
