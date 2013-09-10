@@ -17,7 +17,7 @@ app.configure(function(){
 });
 
 app.get("/", function(reqP, resP){
-	cons.swig("./media/main.html",{},function(err,html){
+	cons.swig("./media/v2/main.html",{},function(err,html){
 		resP.writeHead(200, {"Content-Type" : "text/html"});
 		resP.end(html);
 	});
