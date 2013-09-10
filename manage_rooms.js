@@ -65,11 +65,25 @@ exports.discover_rooms = function(cb){
     
         console.log("Discovering rooms...");
         conn.send(room_iq);
-        
         conn.on("stanza", function(stanza){
-            console.log(stanza.toString());
-            cb();
-            conn.end();
+            if (stanza.is("iq")){
+                var query = stanza.getChild("query").getChildren("item");
+                
+                var i = 0;
+                var array = [];
+                query.forEach(function(q){
+                    array.push({
+                        "jid" : q.attrs.jid,
+                        "name" : q.attrs.name
+                    });
+                });
+                cb(JSON.stringify(array));
+                conn.end();
+            }
+        });
+        
+        conn.on("error", function(stanza){
+            console.log("[ERROR] ")
         });
     });
 }

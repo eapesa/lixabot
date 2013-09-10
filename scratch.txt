@@ -81,3 +81,26 @@ function destroy_room(room_jid, cb){
     });
 }
 */
+
+/*
+var item1 = {
+    "jid" : query[0].attrs.jid,
+    "name" : query[0].attrs.name
+}
+var item2 = {
+    "jid" : query[1].attrs.jid,
+    "name" : query[1].attrs.name
+}
+*/
+/*
+var items = {
+    "item1" : {
+        "jid" : query[0].attrs.jid,
+        "name" : query[0].attrs.name
+    },
+    "item2" : {
+        "jid" : query[1].attrs.jid,
+        "name" : query[1].attrs.name
+    }
+};
+*/

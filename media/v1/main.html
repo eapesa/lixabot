@@ -1,0 +1,56 @@
+<html>
+<head>
+    <script type="text/javascript" src="/media/jquery.js"></script>
+    <script type="text/javascript" src="/media/v1/main.js"></script> 
+    <link href="/media/v1/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="div_main">
+        <div id="div_title">Title</div>
+        <br><br>
+        <div id="div_existing_rooms">
+            Existing Rooms:<br><br>
+            <select id="list_rooms" size="10">
+            </select>
+            <br><br>
+            <button id="btn_disco">Discover Rooms</button><br>
+        </div>
+        <div id="div_manage">
+            <div id="div_create" class="div_do">
+                <div class="div_title_r"><u>Create a room</u></div>
+                Room's Username: &nbsp; <input id="txt_jid" type="text" /><br>
+                Room's Name: &nbsp; &nbsp; &nbsp; &nbsp; <input id="txt_name" type="text" />
+                <br><br>
+                <button id="btn_create">Create Room</button><br>
+            </div>
+            
+            <div id="div_delete" class="div_do">
+                <div class="div_title_r"><u>Delete room(s)</u></div>
+                Room's Username: &nbsp; <input id="txt_jid2" type="text" />
+                <br><br>
+                <button id="btn_delete">Delete Room</button><br>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--
+        <div id="div_workspace">
+            Create MUC room of Ejabberd<br>
+            <br><br>
+            JID of Room: &nbsp; <input id="txt_jid" type="text" /><br>
+            Room Name: &nbsp; <input id="txt_name" type="text" /><br>
+            <button id="btn_create">Create Room</button><br>
+            
+            <br><br>
+            JID of room to destroy: &nbsp; <input id="txt_jid2" type="text" /> &nbsp;
+            <button id="btn_delete">Destroy Room</button><br>
+            
+            <br><br>
+            <button id="btn_disco">Discover Rooms</button><br>
+        </div>
+        
+        <div id="div_done"></div>
+-->

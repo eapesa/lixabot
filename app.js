@@ -52,8 +52,8 @@ app.get("/rooms", function(reqP, resP){
         "status_code" : 200,
         "message" : "OK"
     };
-    user.discover_rooms(function(){
-        resP.json(200, JSON.stringify(reply));
+    user.discover_rooms(function(rooms){
+        resP.end(rooms);
     });
 });
 
