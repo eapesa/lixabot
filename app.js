@@ -36,18 +36,18 @@ app.post("/rooms", function(reqP, resP){
     });
 });
 
-app.delete("/rooms/:room_jid", function(reqP, resP){
-    var room_jid = reqP.params.room_jid;
+app.delete("/rooms/:roomid", function(reqP, resP){
+    var roomid = reqP.params.roomid;
     var reply = {
         "status_code" : 200,
         "message" : "OK"
     };
-    user.delete_room(room_jid, function(){
+    user.delete_room(roomid, function(){
         resP.json(200, JSON.stringify(reply));
     });
 });
 
-app.get("/rooms", function(reqP, resP){
+app.get("/allrooms", function(reqP, resP){
     var reply = {
         "status_code" : 200,
         "message" : "OK"
@@ -55,6 +55,10 @@ app.get("/rooms", function(reqP, resP){
     user.discover_rooms(function(rooms){
         resP.end(rooms);
     });
+});
+
+app.get("/rooms/:roomid", function(reqP, resP){
+    resP.json(200, "Inside room " + reqP.params.roomid);
 });
 
 app.listen(nconf.get("app:port"), nconf.get("app:host"));var nconf = require("nconf");

@@ -1,22 +1,25 @@
 function disco_rooms(){
-    $.getJSON("/rooms", function(data){
+    $.getJSON("/allrooms", function(data){
         $.each(data, function(i, field){
             console.log(data);
-            $("#list_rooms").append("<option>" + field.name.split(" ")[0] + " : " + field.jid + "</option>");
+            $("#list_rooms").append("<option>" + field.jid + ":" + field.name.split(" ")[0] + "</option>");
         });
     });
 }
 $(document).ready(function(){
-    $("#div_create_forms").hide();
-    
+    $("#div_createform").hide();
     $("#list_rooms").empty();
     $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
 	disco_rooms();
     
-    $("#btn_create").hover(function(){
-        $("#div_create_forms").show();
+    $("#div_bcreate").hover(function(){
+        $("#div_createform").fadeIn(600, function(){
+            $(this).slideDown();
+        });
     }, function(){
-        $("#div_create_forms").hide();
+        $("#div_createform").fadeOut(600, function(){
+            $(this).slideUp();
+        });
     });
     
     $("#btn_create").click(function(){
@@ -31,7 +34,6 @@ $(document).ready(function(){
 			dataType: "json"
 		}).done(function(data){
             console.log(data);
-			$("#div_done").html(data.message);
             $("#txt_jid").val("");
             $("#txt_name").val("");
             $("#list_rooms").empty();
@@ -40,16 +42,13 @@ $(document).ready(function(){
 		});
     });
 	$("#btn_delete").click(function(){
-        var room_jid = $("#list_rooms").selected;
-        console.log("ROOM_JID: " + room_jid.value);
+        var room_jid = $("#list_rooms").val();
 		$.ajax({
-			url: "/rooms/" + room_jid.value,
+			url: "/rooms/" + room_jid.split("@")[0],
 			type: "DELETE"
 		}).
 		done(function(data){
             console.log(data);
-			$("#div_done").html(data.message);
-            $("#txt_jid2").val("");
             $("#list_rooms").empty();
             $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
 			disco_rooms();
@@ -59,5 +58,18 @@ $(document).ready(function(){
         $("#list_rooms").empty();
         $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
 		disco_rooms();
+    });
+    $("#btn_manage_room").click(function(){
+        var room_jid = $("#list_rooms").val();
+		$.ajax({
+			url: "/rooms/" + room_jid.split("@")[0],
+			type: "GET"
+		}).
+		done(function(data){
+            console.log(data);
+            $("#list_rooms").empty();
+            $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
+			disco_rooms();
+		});
     });
 });

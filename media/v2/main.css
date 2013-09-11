@@ -1,12 +1,14 @@
 #div_main{
     height : 100%;
     width : 100%;
-    font-family : Verdana;
+    font-family : Helvetica;
+    color : #680775;
     position : fixed;
+    overflow-x : scroll;
+    overflow-y : scroll;
 }
 #div_title{
     width : 100%;
-    font-size : 48px;
     text-align : center;
 }
 #div_existing_rooms{
@@ -25,26 +27,17 @@
 #div_manage{
     float : right;
     height : 100%;
-    width : 40%;
+    width : 50%;
     text-align : center;
-}
-.div_do{
-    height : 30%;
-    font-size : 18px;
-    text-align : left;
-}
-#div_create{
-    float : top;
-}
-#div_delete{
-    float : bottom;
-}
-.div_title_r{
-    font-size : 24px;
+    margin-top : 50px;
 }
 button{
-    text-align : center;
-    font-size : 18px;
-    height : 50px;
+    height : 75px;
     width : 200px;
+    font-size : 14px;   
+    text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-radius : 5px;
+}
+label{
+    font-size : 14px;
 }

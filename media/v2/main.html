@@ -7,7 +7,7 @@
 
 <body>
     <div id="div_main">
-        <div id="div_title">BABBLE: Manage Public Chatroom</div>
+        <div id="div_title"><h1>BABBLE: Manage Public Chatroom<h1><hr></div>
         <br><br>
         <div id="div_existing_rooms">
             Existing Rooms:<br><br>
@@ -15,14 +15,37 @@
             </select>
             <br><br>
             <button id="btn_disco">Refresh</button><br>
+            <br><br><br>
         </div>
         <div id="div_manage">
-            <div id="div_create" class="div_do">
-                <div id="div_btn_create">
-                    <button id="btn_create">Create Room</button>
+            <div id="div_bcreate">
+                <button id="btn_create">Create New Room</button><br><br>
+                <div id="div_createform">
+                    <label>Room's Username:</label> &nbsp; 
+                    <input id="txt_jid" type="text" /><br>
+                    <label>Room's Name:</label> &nbsp; &nbsp; &nbsp; &nbsp; 
+                    <input id="txt_name" type="text" />
                 </div>
+            </div>
+            <br><br>
+            <div id="div_bdelete">
+                <button id="btn_delete">Delete Selected Room</button>
+            </div>
+            <br><br><br>
+            <div id="div_bmanage">
+                <button id="btn_manage_room">Manage Room</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--
+            <div id="div_create" class="div_do">
+                <div id="div_actions">Actions</div>
                 
                 <div id="div_create_forms">
+                    <button id="btn_create">Create Room</button><br>
                     <div class="div_title_r"><u>Create a room</u></div>
                     Room's Username: &nbsp; <input id="txt_jid" type="text" /><br>
                     Room's Name: &nbsp; &nbsp; &nbsp; &nbsp; <input id="txt_name" type="text" />
@@ -34,7 +57,17 @@
                 <br><br>
                 <button id="btn_delete">Delete Room</button><br>
             </div>
-        </div>
-    </div>
-</body>
-</html>
+
+.div_title_r{
+    font-size : 24px;
+}
+button{
+    text-align : center;
+    font-size : 18px;
+    height : 50px;
+    width : 200px;
+}
+#btn_create{
+    text-align : center;
+}
+-->
