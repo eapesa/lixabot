@@ -13,13 +13,9 @@ $(document).ready(function(){
 	disco_rooms();
     
     $("#div_bcreate").hover(function(){
-        $("#div_createform").fadeIn(600, function(){
-            $(this).slideDown();
-        });
+        $("#div_createform").slideDown();
     }, function(){
-        $("#div_createform").fadeOut(600, function(){
-            $(this).slideUp();
-        });
+        $("#div_createform").slideUp();
     });
     
     $("#btn_create").click(function(){
@@ -61,15 +57,6 @@ $(document).ready(function(){
     });
     $("#btn_manage_room").click(function(){
         var room_jid = $("#list_rooms").val();
-		$.ajax({
-			url: "/rooms/" + room_jid.split("@")[0],
-			type: "GET"
-		}).
-		done(function(data){
-            console.log(data);
-            $("#list_rooms").empty();
-            $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
-			disco_rooms();
-		});
+		window.location.href = "/rooms/" + room_jid.split("@")[0];
     });
 });

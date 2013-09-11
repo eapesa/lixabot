@@ -17,7 +17,7 @@ app.configure(function(){
 });
 
 app.get("/", function(reqP, resP){
-	cons.swig("./media/v2/main.html",{},function(err,html){
+	cons.swig("./media/v2/main.html",{},function(err, html){
 		resP.writeHead(200, {"Content-Type" : "text/html"});
 		resP.end(html);
 	});
@@ -58,7 +58,10 @@ app.get("/allrooms", function(reqP, resP){
 });
 
 app.get("/rooms/:roomid", function(reqP, resP){
-    resP.json(200, "Inside room " + reqP.params.roomid);
+    cons.swig("./media/v2/room.html", {"room_name" : reqP.params.roomid}, function(err, html){
+		resP.writeHead(200, {"Content-Type" : "text/html"});
+		resP.end(html);
+    })
 });
 
 app.listen(nconf.get("app:port"), nconf.get("app:host"));var nconf = require("nconf");
