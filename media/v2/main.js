@@ -1,5 +1,5 @@
 function disco_rooms(){
-    $.getJSON("/allrooms", function(data){
+    $.getJSON("/rooms/all", function(data){
         $.each(data, function(i, field){
             console.log(data);
             $("#list_rooms").append("<option>" + field.jid + ":" + field.name.split(" ")[0] + "</option>");
@@ -19,36 +19,46 @@ $(document).ready(function(){
     });
     
     $("#btn_create").click(function(){
-		$.ajax({
-			url: "/rooms",
-			type: "POST",
-			data: JSON.stringify({
-				room_jid: $("#txt_jid").val(),
-                room_name: $("#txt_name").val()
-			}),
-			contentType: "application/json",
-			dataType: "json"
-		}).done(function(data){
-            console.log(data);
-            $("#txt_jid").val("");
-            $("#txt_name").val("");
-            $("#list_rooms").empty();
-            $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
-			disco_rooms();
-		});
+        var jid = $.trim($('#txt_jid').val());
+        var name = $.trim($('#txt_name').val());
+        if ((jid === null) || (jid === "") || (name === null) || (name === "")){
+            alert("Empty textbox(es) is(are) not allowed. Containing of white spaces only is also not allowed.");
+        }else{
+    		$.ajax({
+    			url: "/rooms",
+    			type: "POST",
+    			data: JSON.stringify({
+    				room_jid: jid,
+                    room_name: name
+    			}),
+    			contentType: "application/json",
+    			dataType: "json"
+    		}).done(function(data){
+                console.log(data);
+                $("#txt_jid").val("");
+                $("#txt_name").val("");
+                $("#list_rooms").empty();
+                $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
+    			disco_rooms();
+    		});
+        }
     });
 	$("#btn_delete").click(function(){
         var room_jid = $("#list_rooms").val();
-		$.ajax({
-			url: "/rooms/" + room_jid.split("@")[0],
-			type: "DELETE"
-		}).
-		done(function(data){
-            console.log(data);
-            $("#list_rooms").empty();
-            $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
-			disco_rooms();
-		});
+        if ((room_jid === null) || (room_jid === "")){
+            alert("Select room to delete");
+        }else{
+    		$.ajax({
+    			url: "/rooms/" + room_jid.split("@")[0],
+    			type: "DELETE"
+    		}).
+    		done(function(data){
+                console.log(data);
+                $("#list_rooms").empty();
+                $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
+    			disco_rooms();
+    		});
+        }
 	});
     $("#btn_disco").click(function(){
         $("#list_rooms").empty();

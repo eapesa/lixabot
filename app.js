@@ -47,21 +47,19 @@ app.delete("/rooms/:roomid", function(reqP, resP){
     });
 });
 
-app.get("/allrooms", function(reqP, resP){
-    var reply = {
-        "status_code" : 200,
-        "message" : "OK"
-    };
-    user.discover_rooms(function(rooms){
-        resP.end(rooms);
-    });
-});
-
 app.get("/rooms/:roomid", function(reqP, resP){
-    cons.swig("./media/v2/room.html", {"room_name" : reqP.params.roomid}, function(err, html){
-		resP.writeHead(200, {"Content-Type" : "text/html"});
-		resP.end(html);
-    })
+    var roomid = reqP.params.roomid;
+    if (roomid === "all"){
+        user.discover_rooms(function(rooms){
+            resP.end(rooms);
+        });
+    }else{
+        cons.swig("./media/v2/room.html", {"room_name" : reqP.params.roomid}, function(err, html){
+    		resP.writeHead(200, {"Content-Type" : "text/html"});
+    		resP.end(html);
+        });
+    }
+    
 });
 
 app.listen(nconf.get("app:port"), nconf.get("app:host"));var nconf = require("nconf");

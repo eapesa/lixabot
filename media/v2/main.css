@@ -34,9 +34,26 @@
 button{
     height : 75px;
     width : 200px;
-    font-size : 14px;   
-    text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.25);
     border-radius : 5px;
+    border : 3px outset;
+    font-size : 14px;   
+    /*text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+}
+button:hover{
+    height : 75px;
+    width : 200px;
+    border-radius : 5px;
+    border : 3px outset;
+    font-size : 14px;   
+    background-color : #2299FF;
+}
+button:active{
+    height : 75px;
+    width : 200px;
+    border-radius : 5px;
+    border : 3px inset;
+    font-size : 14px;
+    background-color : #2299FF;
 }
 label{
     font-size : 14px;
