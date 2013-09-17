@@ -11,10 +11,92 @@
     width : 100%;
     text-align : center;
 }
+#div_controlbox{
+    float : left;
+    height : 60%;
+    width : 15%;
+    font-size : 24px;
+    text-align : center;
+}
 #div_usersbox{
+    float : left;
+    height : 60%;
+    width : 30%;
+    font-size : 24px;
+    text-align : center;
+}
+#list_users{
+    height : 60%;
+    width : 90%;
+    font-size : 14px;
+    overflow-x : scroll;
+    overflow-y : scroll;
+}
+#div_msgbox{
+    float : right;
+    height : 60%;
+    width : 55%;
+    font-size : 24px;
+    text-align : center;
+}
+#list_msgs{
+    height : 60%;
+    width : 90%;
+    font-size : 14px;
+    overflow-x : scroll;
+    overflow-y : scroll;
+}
+button{
+    height : 50px;
+    width : 90%;
+    border-radius : 5px;
+    border : 3px outset;
+    font-size : 14px;   
+    /*text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+}
+button:hover{
+    height : 50px;
+    width : 90%;
+    border-radius : 5px;
+    border : 3px outset;
+    font-size : 14px;   
+    background-color : #2299FF;
+}
+button:active{
+    height : 50px;
+    width : 90%;
+    border-radius : 5px;
+    border : 3px inset;
+    font-size : 14px;
+    background-color : #2299FF;
+}
+label{
+    font-size : 14px;
+}
+
+
+/*
+#div_main{
+    height : 100%;
+    width : 100%;
+    font-family : Helvetica;
+    color : #680775;
+    position : fixed;
+}
+#div_title{
+    width : 100%;
+    text-align : center;
+}
+#div_controlbox{
+    float : left;
+    width : 15%;
+    height : 100%;
+    text-align : center;
+}
+#div_usersbox{
+    float : left;
     width : 30%;
     height : 100%;
-    float : left;
     text-align : center;
 }
 #list_users{
@@ -23,12 +105,9 @@
     overflow-x : scroll;
     overflow-y : scroll;
     font-size : 14px;
-    border-style : solid;
-    border-width : 2px;
-    border-color : #680775;
 }
 #div_msgbox{
-    width : 70%;
+    width : 55%;
     height : 100%;
     float : right;
     text-align : center;
@@ -39,7 +118,9 @@
     overflow-x : scroll;
     overflow-y : scroll;
     font-size : 14px;
+}
+
     border-style : solid;
     border-width : 2px;
     border-color : #680775;
-}
+ */

@@ -17,6 +17,8 @@
         get_data();
     });
     </script>
+    <script type="text/javascript" src="/media/v2/room.js"></script>
+    
     <link href="/media/v2/room.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -24,6 +26,16 @@
     <div id="div_main">
         <div id="div_title"><h1>{{room_id}}<h1><hr></div>
         <br><br>
+        <div id="div_controlbox">
+            Control Box<br><br>
+            <div id="div_bBack">
+                <button id="btn_back">Back to Main</button>
+            </div>
+            <br><br>
+            <div id="div_kickUser">
+                <button id="btn_kick">Kick User</button>
+            </div>
+        </div>
         <div id="div_usersbox">
             User's List<br><br>
             <select id="list_users" size="10">

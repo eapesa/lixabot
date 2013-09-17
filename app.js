@@ -62,12 +62,18 @@ app.get("/rooms/:roomid", function(reqP, resP){
         });
     }else{
         user.get_member_list(roomid, function(users){
-            console.log(users);
             resP.end(users);
         });
     }
 });
-
+/*
+app.get("/rooms/:roomid/messages", function(reqP, resP){
+    var roomid = reqP.params.roomid;
+    user.listen_to_messages(roomid, function(){
+        resP.end();
+    });
+});
+ */
 app.get("/chatroom/:roomid", function(reqP, resP){
     cons.swig("./media/v2/room.html", {"room_id" : reqP.params.roomid}, function(err, html){
 		resP.writeHead(200, {"Content-Type" : "text/html"});
