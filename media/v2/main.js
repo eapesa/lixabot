@@ -13,15 +13,16 @@ $(document).ready(function(){
 	disco_rooms();
     
     $("#div_bcreate").hover(function(){
-        $("#div_createform").slideDown();
+        $("#div_createform").fadeIn(500);
     }, function(){
-        $("#div_createform").slideUp();
+        $("#div_createform").fadeOut(500);
     });
     
     $("#btn_create").click(function(){
         var jid = $.trim($('#txt_jid').val());
         var name = $.trim($('#txt_name').val());
-        if ((jid === null) || (jid === "") || (name === null) || (name === "")){
+        var desc = $.trim($('#txt_desc').val());
+        if ((jid === null) || (jid === "") || (name === null) || (name === "") || (desc === null) || (desc === "")){
             alert("Empty textbox(es) is(are) not allowed. Containing of white spaces only is also not allowed.");
         }else{
     		$.ajax({
@@ -29,7 +30,8 @@ $(document).ready(function(){
     			type: "POST",
     			data: JSON.stringify({
     				room_jid: jid,
-                    room_name: name
+                    room_name: name,
+                    room_desc: desc
     			}),
     			contentType: "application/json",
     			dataType: "json"
@@ -37,6 +39,7 @@ $(document).ready(function(){
                 console.log(data);
                 $("#txt_jid").val("");
                 $("#txt_name").val("");
+                $("#txt_desc").val("");
                 $("#list_rooms").empty();
                 $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
     			disco_rooms();
@@ -67,6 +70,6 @@ $(document).ready(function(){
     });
     $("#btn_manage_room").click(function(){
         var room_jid = $("#list_rooms").val();
-		window.location.href = "/rooms/" + room_jid.split("@")[0];
+		window.location.href = "/chatroom/" + room_jid.split("@")[0];
     });
 });

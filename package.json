@@ -10,6 +10,7 @@
         "swig" : "*",
         "node-stringprep" : "*",
         "node-xmpp" : "*",
-        "request" : "*"
+        "request" : "*",
+	    "async" : "*"
     }
 }

@@ -1,8 +1,40 @@
 <html>
 <head>
+    <script type="text/javascript" src="/media/jquery.js"></script>
+    <script type="text/javascript">
+    function get_data(){
+        $.getJSON("/rooms/{{room_id}}",function(data){
+            $("#list_users").empty();
+            $.each(data, function(i, field){
+                console.log(data);
+                $("#list_users").append("<option>" + field.name + "</option>");
+            });
+        });
+        setInterval(get_data, 5000);
+    }
+    
+    $(document).ready(function(){
+        get_data();
+    });
+    </script>
+    <link href="/media/v2/room.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    ROOM {{room_name}}
+    <div id="div_main">
+        <div id="div_title"><h1>{{room_id}}<h1><hr></div>
+        <br><br>
+        <div id="div_usersbox">
+            User's List<br><br>
+            <select id="list_users" size="10">
+            </select>
+        </div>
+        <div id="div_msgbox">
+            Messages<br><br>
+            <select id="list_msgs" size="10">
+            </select>
+        </div>
+    </div>
+    <br><br><br>
 </body>
 </html>

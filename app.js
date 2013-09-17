@@ -1,14 +1,15 @@
 var nconf = require("nconf");
 var cons = require("consolidate");
 var express = require("express");
-
-var app = express();
+var xmpp = require("node-xmpp");
 
 var user = require("./manage_rooms");
 
 nconf.use("file", {
     file: "./config.json"
 });
+
+var app = express();
 
 app.configure(function(){
     app.use("/", express.static(__dirname));
@@ -17,7 +18,11 @@ app.configure(function(){
 });
 
 app.get("/", function(reqP, resP){
-	cons.swig("./media/v2/main.html",{},function(err, html){
+    var data = {
+        "server" : nconf.get("account:host"), 
+        "domain" : nconf.get("account:jid").split("@")[1]
+    }
+	cons.swig("./media/v2/main.html", data,function(err, html){
 		resP.writeHead(200, {"Content-Type" : "text/html"});
 		resP.end(html);
 	});
@@ -26,12 +31,14 @@ app.get("/", function(reqP, resP){
 app.post("/rooms", function(reqP, resP){
     var room_jid = reqP.body.room_jid;
     var room_name = reqP.body.room_name;
+    var room_desc = reqP.body.room_desc;
     
     var reply = {
         "status_code" : 200,
         "message" : "OK"
     };
-    user.create_room(room_jid, room_name, function(){
+    
+    user.create_room(room_jid, room_name, room_desc, function(){
         resP.json(200, JSON.stringify(reply));
     });
 });
@@ -54,12 +61,18 @@ app.get("/rooms/:roomid", function(reqP, resP){
             resP.end(rooms);
         });
     }else{
-        cons.swig("./media/v2/room.html", {"room_name" : reqP.params.roomid}, function(err, html){
-    		resP.writeHead(200, {"Content-Type" : "text/html"});
-    		resP.end(html);
+        user.get_member_list(roomid, function(users){
+            console.log(users);
+            resP.end(users);
         });
     }
-    
 });
+
+app.get("/chatroom/:roomid", function(reqP, resP){
+    cons.swig("./media/v2/room.html", {"room_id" : reqP.params.roomid}, function(err, html){
+		resP.writeHead(200, {"Content-Type" : "text/html"});
+		resP.end(html);
+    });
+})
 
 app.listen(nconf.get("app:port"), nconf.get("app:host"));var nconf = require("nconf");

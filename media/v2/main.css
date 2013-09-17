@@ -18,18 +18,27 @@
     font-size : 24px;
     text-align : center;
 }
+#div_details{
+    font-size : 16px;
+}
 #list_rooms{
     height : 60%;
     width : 60%;
     font-size : 14px;
+    overflow-x : scroll;
     overflow-y : scroll;
 }
 #div_manage{
     float : right;
     height : 100%;
-    width : 50%;
+    width : 40%;
     text-align : center;
     margin-top : 50px;
+    margin-right : 5%;
+}
+#div_createform{
+    margin-left : 5%;
+    text-align : center;
 }
 button{
     height : 75px;

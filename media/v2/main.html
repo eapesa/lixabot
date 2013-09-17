@@ -7,10 +7,15 @@
 
 <body>
     <div id="div_main">
-        <div id="div_title"><h1>BABBLE: Manage Public Chatroom<h1><hr></div>
+        <div id="div_title"><h1>eJabberd: PUBLIC CHATROOM MANAGER<h1><hr></div>
         <br><br>
         <div id="div_existing_rooms">
             Existing Rooms:<br><br>
+            <div id="div_details">
+                Server: {{server}}<br>
+                Domain: {{domain}}
+            </div>
+            <br>
             <select id="list_rooms" size="10">
             </select>
             <br><br>
@@ -20,10 +25,12 @@
         <div id="div_manage">
             <div id="div_bcreate">
                 <div id="div_createform">
-                    <label>Room's Username:</label> &nbsp; 
+                    <label>Room Username:</label> &nbsp; &nbsp; 
                     <input id="txt_jid" type="text" /><br>
-                    <label>Room's Name:</label> &nbsp; &nbsp; &nbsp; &nbsp; 
-                    <input id="txt_name" type="text" />
+                    <label>Room Name:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <input id="txt_name" type="text" /><br>
+                    <label>Room Description:</label> &nbsp; 
+                    <input id="txt_desc" type="text" />
                 </div>
                 <br>
                 <button id="btn_create">Create New Room</button>
