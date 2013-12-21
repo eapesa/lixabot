@@ -28,6 +28,13 @@ app.get("/", function(reqP, resP){
 	});
 });
 
+app.get("/chatroom/:roomid", function(reqP, resP){
+    cons.swig("./media/v2/room.html", {"room_id" : reqP.params.roomid}, function(err, html){
+		resP.writeHead(200, {"Content-Type" : "text/html"});
+		resP.end(html);
+    });
+})
+
 app.post("/rooms", function(reqP, resP){
     var room_jid = reqP.body.room_jid;
     var room_name = reqP.body.room_name;
@@ -66,19 +73,23 @@ app.get("/rooms/:roomid", function(reqP, resP){
         });
     }
 });
-/*
-app.get("/rooms/:roomid/messages", function(reqP, resP){
-    var roomid = reqP.params.roomid;
-    user.listen_to_messages(roomid, function(){
-        resP.end();
-    });
-});
- */
-app.get("/chatroom/:roomid", function(reqP, resP){
-    cons.swig("./media/v2/room.html", {"room_id" : reqP.params.roomid}, function(err, html){
-		resP.writeHead(200, {"Content-Type" : "text/html"});
-		resP.end(html);
-    });
-})
 
-app.listen(nconf.get("app:port"), nconf.get("app:host"));var nconf = require("nconf");
+app.post("/rooms/kick", function(reqP, resP){
+    var roomid = reqP.body.roomid;
+    var participant = reqP.body.participant;
+    var reply = {
+        "status_code" : 200,
+        "message" : "OK"
+    };
+    user.kick_participant(roomid, participant, function(){
+        resP.json(200, JSON.stringify(reply));
+    })
+});
+
+app.post("/rooms/ban", function(reqP, resP){
+    
+});
+
+app.listen(nconf.get("app:port"), nconf.get("app:host"), function() {
+    console.log("Server listening on " + nconf.get("app:host") + ":" + nconf.get("app:port"));
+});

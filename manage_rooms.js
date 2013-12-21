@@ -52,7 +52,7 @@ exports.delete_room = function(room_jid, cb){
                 .c("destroy");
     
         console.log("Destroying room...");
-        conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat"));
+        conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat")); 
         conn.send(room_iq);
         
         cb();
@@ -67,9 +67,11 @@ exports.discover_rooms = function(cb){
                 .c("query", { xmlns : 'http://jabber.org/protocol/disco#items'});
     
         console.log("Discovering rooms...");
+        conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat")); 
         conn.send(room_iq);
         
         conn.on("stanza", function(stanza){
+            console.log("STANZA " + stanza);
             if (stanza.is("iq")){
                 var query = stanza.getChild("query").getChildren("item");
                 
@@ -98,7 +100,7 @@ exports.get_member_list = function(room_jid, cb){
         var room_iq = new xmpp.Element('iq', { to: room_jid + "@muc." + nconf.get("account:jid").split("@")[1], type: 'get' })
                 .c("query", { xmlns : 'http://jabber.org/protocol/disco#items'});
     
-        console.log("Getting member list...");
+        //console.log("Getting member list...");
         conn.send(room_iq);
         
         conn.on("stanza", function(stanza){
@@ -131,28 +133,23 @@ exports.get_member_list = function(room_jid, cb){
                 */
             }
         });
+    });
+}
+
+exports.kick_participant = function(room_jid, participant, cb){
+    var conn = new xmpp.Client(nconf.get("account"));  
+    on_online(conn, function(){    
+        var room_iq = new xmpp.Element('iq', { to: room_jid + "@muc." + nconf.get("account:jid").split("@")[1], type: 'set' })
+                .c("query", { xmlns : 'http://jabber.org/protocol/muc#admin'})
+                .c("item", { nick : participant, role : "participant"})
+                .c("reason")
+                .t("violated rules");
+    
+        console.log("Kicking a user in a room...");
+        conn.send(room_iq);
         
-        conn.on("stanza", function(stanza) {
-            // always log error stanzas
-            if (stanza.attrs.type == 'error') {
-                util.log('[error] ' + stanza);
-                return;
-            }
-
-            // ignore everything that isn't a room message
-                if (!stanza.is('message') || !stanza.attrs.type == 'groupchat') {
-                return;
-            }
-
-            // ignore messages we sent
-            var body = stanza.getChild('body');
-            // message without body is probably a topic change
-            if (!body)
-                return;
-            
-            var message = body.getText();
-            console.log(message);
-        });
+        cb();
+        conn.end();
     });
 }
 
