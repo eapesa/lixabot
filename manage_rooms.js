@@ -32,7 +32,7 @@ exports.create_room = function(room_jid, room_name, room_desc, cb){
               .c("value")
               .t(room_desc);
         
-        console.log("Creating room...");
+        //console.log("Creating room...");
         conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat")); 
         // Send new room's presence
         conn.send(room_presence);
@@ -51,7 +51,7 @@ exports.delete_room = function(room_jid, cb){
                 .c("query", { xmlns : 'http://jabber.org/protocol/muc#owner'})
                 .c("destroy");
     
-        console.log("Destroying room...");
+        //console.log("Destroying room...");
         conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat")); 
         conn.send(room_iq);
         
@@ -66,12 +66,12 @@ exports.discover_rooms = function(cb){
         var room_iq = new xmpp.Element('iq', { to: "muc." + nconf.get("account:jid").split("@")[1], type: 'get' })
                 .c("query", { xmlns : 'http://jabber.org/protocol/disco#items'});
     
-        console.log("Discovering rooms...");
+        //console.log("Discovering rooms...");
         conn.send(new xmpp.Element("presence", { type: "available" }).c("show").t("chat")); 
         conn.send(room_iq);
         
         conn.on("stanza", function(stanza){
-            console.log("STANZA " + stanza);
+            //console.log("STANZA " + stanza);
             if (stanza.is("iq")){
                 var query = stanza.getChild("query").getChildren("item");
                 
@@ -89,7 +89,7 @@ exports.discover_rooms = function(cb){
         });
         
         conn.on("error", function(stanza){
-            console.log("[ERROR] ")
+            //console.log("[ERROR] ")
         });
     });
 }
@@ -100,7 +100,7 @@ exports.get_member_list = function(room_jid, cb){
         var room_iq = new xmpp.Element('iq', { to: room_jid + "@muc." + nconf.get("account:jid").split("@")[1], type: 'get' })
                 .c("query", { xmlns : 'http://jabber.org/protocol/disco#items'});
     
-        //console.log("Getting member list...");
+        ////console.log("Getting member list...");
         conn.send(room_iq);
         
         conn.on("stanza", function(stanza){
@@ -123,7 +123,7 @@ exports.get_member_list = function(room_jid, cb){
             
             if (stanza.is("message") && stanza.attrs.type == "groupchat"){
                 var msg_body = stanza.getChild("body");
-                console.log(msg_body);
+                //console.log(msg_body);
                 /*
                 msg_body.forEach(function(q){
                     array_msgs.push({
@@ -145,7 +145,7 @@ exports.kick_participant = function(room_jid, participant, cb){
                 .c("reason")
                 .t("violated rules");
     
-        console.log("Kicking a user in a room...");
+        //console.log("Kicking a user in a room...");
         conn.send(room_iq);
         
         cb();
@@ -176,7 +176,7 @@ exports.listen_to_messages = function(room_jid, cb){
                 return;
             
             var message = body.getText();
-            console.log(message);
+            //console.log(message);
             cb();
         });
     });
