@@ -4,36 +4,11 @@
         "port" : 8080
         
     },
-    "account_bst" : {
-        "jid"         : "admin@babbleim.com",
-        "password"    : "admin",
-        "host"        : "superim.staging.voyager.ph",
-        "port"        : 5222,
-        "reconnect"   : true
-    },
-    "account_bd" : {
-        "jid"         : "admin@babbleim.com",
-        "password"    : "vvsmartvv",
-        "host"        : "dev-im.smartnet.ph",
-        "port"        : 5822,
-        "reconnect"   : true
-    },
     "account" : {
         "jid"         : "admin@babbleim.com",
         "password"    : "35rUuAfZw6AmCibxdawh",
         "host"        : "chat.babbleim.com",
         "port"        : 5222,
         "reconnect"   : false
-    },
-    "account_hst" : {
-        "jid"         : "admin@babbleim.com",
-        "password"    : "vvVOYAGERvv",
-        "host"        : "heyu.staging.babbleim.com",
-        "port"        : 5222,
-        "reconnect"   : false
-    },
-    "prod_yap" : {
-        "jid" : "admin@yapme.im",
-        "password" : "1Qmsgrsq5PRfu1d7"
     }
 }

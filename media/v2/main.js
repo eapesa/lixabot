@@ -7,23 +7,25 @@ function disco_rooms(){
     });
 }
 $(document).ready(function(){
-    $("#div_createform").hide();
+    //$("#div_createform").hide();
     $("#list_rooms").empty();
     $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
 	disco_rooms();
     
+    /*
     $("#div_bcreate").hover(function(){
         $("#div_createform").fadeIn(500);
     }, function(){
         $("#div_createform").fadeOut(500);
     });
+    */
     
     $("#btn_create").click(function(){
         var jid = $.trim($('#txt_jid').val());
         var name = $.trim($('#txt_name').val());
         var desc = $.trim($('#txt_desc').val());
-        if ((jid === null) || (jid === "") || (name === null) || (name === "") || (desc === null) || (desc === "")){
-            alert("Empty textbox(es) is(are) not allowed. Containing of white spaces only is also not allowed.");
+        if ((jid === null) || (jid === "") || (name === null) || (name === "")){
+            alert("Please fill out the username and name of the room. Username/Name containing white spaces only are not allowed.");
         }else{
     		$.ajax({
     			url: "/rooms",
@@ -63,13 +65,16 @@ $(document).ready(function(){
     		});
         }
 	});
+    /*
     $("#btn_disco").click(function(){
         $("#list_rooms").empty();
         $("#list_rooms").append("<option style='text-align:center;'>---List of Rooms---</option>");
 		disco_rooms();
     });
+    
     $("#btn_manage_room").click(function(){
         var room_jid = $("#list_rooms").val();
 		window.location.href = "/chatroom/" + room_jid.split("@")[0];
     });
+     */
 });

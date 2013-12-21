@@ -17,7 +17,7 @@ app.configure(function(){
 	app.use(app.router);
 });
 
-app.get("/", function(reqP, resP){
+app.get("/muc", function(reqP, resP){
     var data = {
         "server" : nconf.get("account:host"), 
         "domain" : nconf.get("account:jid").split("@")[1]
@@ -74,21 +74,9 @@ app.get("/rooms/:roomid", function(reqP, resP){
     }
 });
 
-app.post("/rooms/kick", function(reqP, resP){
-    var roomid = reqP.body.roomid;
-    var participant = reqP.body.participant;
-    var reply = {
-        "status_code" : 200,
-        "message" : "OK"
-    };
-    user.kick_participant(roomid, participant, function(){
-        resP.json(200, JSON.stringify(reply));
-    })
-});
-
-app.post("/rooms/ban", function(reqP, resP){
-    
-});
+app.all("*", function(req, res){
+    res.json(404, "Page Not Found");
+})
 
 app.listen(nconf.get("app:port"), nconf.get("app:host"), function() {
     console.log("Server listening on " + nconf.get("app:host") + ":" + nconf.get("app:port"));
